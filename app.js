@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
-const { models: { User }} = require('./db');
+const { models: { User }} = require('./db/db');
 const path = require('path');
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
