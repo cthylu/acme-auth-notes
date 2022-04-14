@@ -89,7 +89,7 @@ const syncAndSeed = async()=> {
       userId: lucy.id
     }
   ]
-  const newNotes = await Promise.all(
+  await Promise.all(
     notes.map( note => Note.create(note))
   );
 

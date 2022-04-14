@@ -3,7 +3,27 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import axios from 'axios';
 
+
+const GET_NOTES = 'GET_NOTES';
+
+const _getNotes = (notes) => {
+  return {
+    type: GET_NOTES,
+    notes
+  }
+}
+
+export const getNotes = () => {
+  return async (dispatch) => {
+    const { data: notes } = await axios.get('/api/notes');
+    dispatch(_getNotes(notes));
+  }
+}
+
 const notes = (state = [], action)=> {
+  if (action.type === GET_NOTES) {
+    return action.notes;
+  }
   return state;
 };
 

@@ -3,6 +3,7 @@ const app = express();
 app.use(express.json());
 const { models: { User }} = require('./db/db');
 const path = require('path');
+const { Note } = require('./db/Note');
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
@@ -30,6 +31,16 @@ app.get('/api/purchases', async(req, res, next)=> {
   try {
     const user = await User.byToken(req.headers.authorization);
     res.send('TODO Send the purchases for this user');
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+app.get('/api/notes', async(req, res, next)=> {
+  try {
+    const notes = await Note.findAll();
+    res.send(notes);
   }
   catch(ex){
     next(ex);
